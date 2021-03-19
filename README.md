@@ -12,7 +12,7 @@
 
 ## DOING
 - [x] url shortning 핵심 로직 구현
-- [ ] DB, 기본 api 환경 설정
+- [x] DB, 기본 api 환경 설정
 - [ ] view 연결
 
 ---
