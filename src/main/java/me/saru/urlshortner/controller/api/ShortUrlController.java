@@ -1,28 +1,33 @@
 package me.saru.urlshortner.controller.api;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.saru.urlshortner.data.ShortUrlDto;
 import me.saru.urlshortner.domain.ShortUrl;
-import me.saru.urlshortner.exception.NotFoundException;
+import me.saru.urlshortner.service.ShortUrlService;
 import me.saru.urlshortner.utils.ApiUtils;
-import org.springframework.web.bind.annotation.*;
+import me.saru.urlshortner.utils.URLShortUtil;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/shorturl")
+@RequiredArgsConstructor
 @Slf4j
 public class ShortUrlController {
 
-    @GetMapping("")
-    public ApiUtils.ApiResult<ShortUrl> error() {
-        throw new NotFoundException("test");
-    }
+    private final ShortUrlService shortUrlService;
 
     @PostMapping("")
-    public ApiUtils.ApiResult<ShortUrl> generateUrl(@RequestBody @Valid ShortUrlDto.Req req) {
+    public ApiUtils.ApiResult<ShortUrlDto.Res> generateUrl(@RequestBody @Valid ShortUrlDto.Req req) {
         log.debug("req : {}", req);
 
-        return ApiUtils.success(new ShortUrl("test"));
+        ShortUrl shortUrl = shortUrlService.findByOriginalUrl(req.getUrl());
+
+        return ApiUtils.success(new ShortUrlDto.Res(shortUrl.getCount(), URLShortUtil.encode(shortUrl.getId())));
     }
 }

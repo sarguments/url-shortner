@@ -9,32 +9,41 @@ import org.springframework.http.MediaType;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class ShortUrlControllerTest extends DefaultSpringTest<ShortUrl> {
-    @Test
-    void error() throws Exception {
-        mockMvc.perform(get("/api/shorturl"))
-                .andExpect(status().isNotFound())
-                .andExpect(jsonPath("$.success", is(false)))
-                .andExpect(jsonPath("$.error.message", is("test")));
-    }
 
     @Test
-    void generateShortUrl() throws Exception {
+    void checkUrlByHibernateValidator() throws Exception {
         mockMvc.perform(post("/api/shorturl")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new ShortUrlDto.Req("test")))
         )
                 .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.success", is(false)));
+
+        mockMvc.perform(post("/api/shorturl")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ShortUrlDto.Req("test.com")))
+        )
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.success", is(false)));
+
+        mockMvc.perform(post("/api/shorturl")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ShortUrlDto.Req("http://test.com")))
+        )
+                .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success", is(true)))
-                .andExpect(jsonPath("$.response.url").isNotEmpty());
+                .andExpect(jsonPath("$.success", is(true)));
     }
 
     @Test
