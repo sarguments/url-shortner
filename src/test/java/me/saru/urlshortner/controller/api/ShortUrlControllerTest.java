@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import java.util.Collections;
 
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -43,7 +44,12 @@ class ShortUrlControllerTest extends DefaultSpringTest<ShortUrl> {
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success", is(true)));
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.response.url", is("http://localhost:8080/cByc")));
+
+        mockMvc.perform(get("/cByc"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection());
     }
 
     @Test

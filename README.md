@@ -4,19 +4,14 @@
 > 
 > 예) https://en.wikipedia.org/wiki/URL_shortening => http://localhost/JZfOQNro
 
-## TODO
-- [ ] 동일한 URL에 대한 요청 수 정보를 가져야 한다
-- [ ] Shortening된 URL을 요청받으면 원래 URL로 리다이렉트
-- [ ] URL 입력폼 제공 및 결과 출력 
-- [ ] Unit test 및 Integration test 작성
-
 ## DOING
 - [x] url shortning 핵심 로직 구현
 - [x] DB, 기본 api 환경 설정
-- [ ] api 생성 요청에 대한 응답 구현
-- [ ] 중복된 api 생성 요청에 대한 증가된 카운트 응답 구현
-- [ ] 단축 URL 요청에 대한 목표 URL 로의 라디이렉트 구현
-- [ ] view 연결
+- [x] api 생성 요청에 대한 응답 구현
+- [x] 중복된 api 생성 요청에 대한 증가된 카운트 응답 구현
+- [x] 단축 URL 요청에 대한 목표 URL 로의 라디이렉트 구현
+- [ ] 기본 페이지 생성
+- [ ] 존재하지 않는 단축 URL 페이지 생성
 
 ---
 

@@ -2,6 +2,7 @@ package me.saru.urlshortner.controller.api;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.saru.urlshortner.config.ConfigProperty;
 import me.saru.urlshortner.data.ShortUrlDto;
 import me.saru.urlshortner.domain.ShortUrl;
 import me.saru.urlshortner.service.ShortUrlService;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 @Slf4j
 public class ShortUrlController {
 
+    private final ConfigProperty configProperty;
     private final ShortUrlService shortUrlService;
 
     @PostMapping("")
@@ -27,7 +29,8 @@ public class ShortUrlController {
         log.debug("req : {}", req);
 
         ShortUrl shortUrl = shortUrlService.findByOriginalUrl(req.getUrl());
+        String encodedUrl = configProperty.getBaseUrl() + URLShortUtil.encode(shortUrl.getId());
 
-        return ApiUtils.success(new ShortUrlDto.Res(shortUrl.getCount(), URLShortUtil.encode(shortUrl.getId())));
+        return ApiUtils.success(new ShortUrlDto.Res(shortUrl.getCount(), encodedUrl));
     }
 }

@@ -10,13 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class HomeControllerTest extends DefaultSpringTest<ShortUrl> {
 
     @Test
-    void init() throws Exception {
-        mockMvc.perform(get("/"))
-                .andExpect(status().is3xxRedirection());
-    }
-
-    @Test
-    void init2() throws Exception {
+    void redirect() throws Exception {
         mockMvc.perform(get("/asdf"))
                 .andExpect(status().is3xxRedirection());
     }

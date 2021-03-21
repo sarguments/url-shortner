@@ -2,6 +2,7 @@ package me.saru.urlshortner.service;
 
 import lombok.RequiredArgsConstructor;
 import me.saru.urlshortner.domain.ShortUrl;
+import me.saru.urlshortner.exception.NotFoundException;
 import me.saru.urlshortner.repository.ShortUrlRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,5 +21,10 @@ public class ShortUrlService {
         ShortUrl shortUrl = urlOptional.orElseGet(() -> shortUrlRepository.save(new ShortUrl(url)));
         shortUrl.increaseCount();
         return shortUrl;
+    }
+
+    public String findById(Long decode) {
+        ShortUrl shortUrl = shortUrlRepository.findById(decode).orElse(new ShortUrl("not-found"));
+        return shortUrl.getUrl();
     }
 }
