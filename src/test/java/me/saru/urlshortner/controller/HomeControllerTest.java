@@ -12,6 +12,12 @@ class HomeControllerTest extends DefaultSpringTest<ShortUrl> {
     @Test
     void init() throws Exception {
         mockMvc.perform(get("/"))
-                .andExpect(status().isOk());
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    void init2() throws Exception {
+        mockMvc.perform(get("/asdf"))
+                .andExpect(status().is3xxRedirection());
     }
 }

@@ -76,4 +76,28 @@ class ShortUrlControllerTest extends DefaultSpringTest<ShortUrl> {
                 .andExpect(jsonPath("$.response").isEmpty())
                 .andExpect(jsonPath("$.error.message", is("Url must be not empty")));
     }
+
+    @Test
+    void generateShortUrlCount() throws Exception {
+        mockMvc.perform(post("/api/shorturl")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ShortUrlDto.Req("http://test.com")))
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.response.count", is(1)));
+
+        mockMvc.perform(post("/api/shorturl")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new ShortUrlDto.Req("http://test.com")))
+        )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success", is(true)))
+                .andExpect(jsonPath("$.response.count", is(2)));
+
+    }
 }

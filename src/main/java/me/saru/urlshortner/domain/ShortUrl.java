@@ -22,7 +22,6 @@ public class ShortUrl {
     private Long id;
 
     @CreatedDate
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime created;
 
@@ -34,5 +33,9 @@ public class ShortUrl {
 
     public ShortUrl(String url) {
         this.url = url;
+    }
+
+    public void increaseCount() {
+        this.count++;
     }
 }
