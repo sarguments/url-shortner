@@ -40,3 +40,10 @@
     java -jar url-shortner-0.0.1-SNAPSHOT.jar
     ```
 4. http://localhost:8080에 접속
+
+## 구현 환경
+- java 1.8
+- intellij
+- springboot 2.4.4
+- spring data jpa
+- h2
