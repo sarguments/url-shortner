@@ -16,6 +16,9 @@ import javax.validation.ConstraintViolationException;
 
 import static me.saru.urlshortner.utils.ApiUtils.error;
 
+/**
+ * 통합 에외 처리 클래스
+ */
 @ControllerAdvice
 @Slf4j
 public class GeneralExceptionHandler {

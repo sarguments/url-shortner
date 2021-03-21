@@ -1,6 +1,5 @@
 package me.saru.urlshortner.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -8,6 +7,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * id값이 1부터 시작하면 단축된 Url 이 너무 짧기 때문에 100000 부터 증가하도록 한다
+ */
 @Entity
 @EntityListeners(value = AuditingEntityListener.class)
 @SequenceGenerator(name = "seq", initialValue = 100000)

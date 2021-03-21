@@ -1,10 +1,11 @@
 package me.saru.urlshortner.utils;
 
-/*
-    공격적인 단어를 생성할 수 있는 문자 삭제 ('a', 'e', 'i', 'o', 'u')
-    모호한 것 삭제 ('l', '1')
+/**
+ * 원본 url을 단축시키거나 원래대로 되돌리는 유틸 클래스
  */
 public final class URLShortUtil {
+    // 공격적인 단어를 생성할 수 있는 문자 삭제 ('a', 'e', 'i', 'o', 'u')
+    // 모호한 문자 삭제 ('l', '1')
     public static final String ALPHABET = "bcdfghjkmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
     public static final int BASE = ALPHABET.length();
 

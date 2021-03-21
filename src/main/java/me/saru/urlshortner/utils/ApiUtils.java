@@ -2,6 +2,9 @@ package me.saru.urlshortner.utils;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * api json 응답을 만들기 위한 유틸 클래스
+ */
 public class ApiUtils {
 
     public static <T> ApiResult<T> success(T response) {
