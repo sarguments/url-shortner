@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Url Shortening</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}">
+</head>
+
+<body>
+<div>
+    <div class="container">
+        <h1>Url Shortening</h1>
+        <div class="row">
+            <div class="column">
+                <p>http:// 또는 https:// 를 포함한 url 을 입력해 주세요</p><br>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="four column">
+                <label for="original-url">줄일 url 입력</label>
+                <textarea class="u-full-width" id="original-url"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="four column">
+                <label for="short-url">결과</label>
+                <input class="u-full-width" type="text" id="short-url">
+            </div>
+        </div>
+
+        <input type="button" id="convert-btn" value="submit">
+    </div>
+
+</div>
+
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+
+<script>
+    $(function () {
+        $("#convert-btn").click(function () {
+            $("#short-url").val("");
+
+            var data = {};
+            data.url = $("#original-url").val();
+
+            $.ajax({
+                url: 'api/shorturl',
+                type: 'POST',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                complete: function (result) {
+                    if (result.responseJSON.success === true) {
+                        $("#short-url").val(result.responseJSON.response.url);
+                        alert("요청 회수 : " + result.responseJSON.response.count)
+                    } else {
+                        alert(result.responseJSON.error.message);
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

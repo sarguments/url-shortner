@@ -1,6 +1,7 @@
 package me.saru.urlshortner.service;
 
 import lombok.RequiredArgsConstructor;
+import me.saru.urlshortner.config.ConfigProperty;
 import me.saru.urlshortner.domain.ShortUrl;
 import me.saru.urlshortner.exception.NotFoundException;
 import me.saru.urlshortner.repository.ShortUrlRepository;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ShortUrlService {
 
+    private final ConfigProperty configProperty;
     private final ShortUrlRepository shortUrlRepository;
 
     @Transactional
@@ -24,7 +26,7 @@ public class ShortUrlService {
     }
 
     public String findById(Long decode) {
-        ShortUrl shortUrl = shortUrlRepository.findById(decode).orElse(new ShortUrl("not-found"));
+        ShortUrl shortUrl = shortUrlRepository.findById(decode).orElse(new ShortUrl(configProperty.getBaseUrl() + "not-found"));
         return shortUrl.getUrl();
     }
 }

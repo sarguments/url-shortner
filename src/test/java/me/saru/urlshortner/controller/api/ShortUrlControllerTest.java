@@ -104,6 +104,5 @@ class ShortUrlControllerTest extends DefaultSpringTest<ShortUrl> {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success", is(true)))
                 .andExpect(jsonPath("$.response.count", is(2)));
-
     }
 }

@@ -18,4 +18,9 @@ public class HomeController {
         String targetUrl = shortUrlService.findById(decode);
         return "redirect:" + targetUrl;
     }
+
+    @GetMapping("/not-found")
+    public String notFound() {
+        return "not-found";
+    }
 }
