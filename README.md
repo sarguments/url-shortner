@@ -1,5 +1,7 @@
 # url  shortner
 
+> **상태: 레거시 아카이브 (2021 스냅샷)** — Spring Boot 2.4.4 / Java 8 / Gradle 6.8 등 현재 EOL된 스택으로 작성된 학습 기록이며, 이후 의존성 업데이트나 유지보수를 하지 않습니다. 최신 JDK에서는 빌드가 실패할 수 있으니 2021년 당시의 설계와 테스트 코드를 보는 용도로 활용해 주세요.
+
 > URL을 입력받아 짧게 줄여주고, Shortening된 URL을 입력하면 원래 URL로 리다이렉트하는 URL Shortening Service
 > 
 > 예) https://en.wikipedia.org/wiki/URL_shortening => http://localhost/JZfOQNro
