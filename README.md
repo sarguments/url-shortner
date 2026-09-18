@@ -1,6 +1,6 @@
 # url  shortner
 
-> **상태: 레거시 아카이브 (2021 스냅샷)** — Spring Boot 2.4.4 / Java 8 / Gradle 6.8 등 현재 EOL된 스택으로 작성된 학습 기록이며, 이후 의존성 업데이트나 유지보수를 하지 않습니다. 최신 JDK에서는 빌드가 실패할 수 있으니 2021년 당시의 설계와 테스트 코드를 보는 용도로 활용해 주세요.
+> **상태: 학습 기록 (2021 작성 · 2026-09 빌드 복구)** — 2021년 당시의 설계·테스트 코드를 보는 용도입니다. JDK 17(Temurin 17.0.20)에서 `./gradlew test` 9/9 통과 확인했으며, Spring Boot 2.7.18(2.x 최종)·Gradle wrapper 7.6.4로 맞췄습니다. Boot 3(Jakarta)로의 상향 계획은 없습니다.
 
 > URL을 입력받아 짧게 줄여주고, Shortening된 URL을 입력하면 원래 URL로 리다이렉트하는 URL Shortening Service
 > 
@@ -32,22 +32,22 @@
 
 ## 빌드/실행 방법
 
-> 실행 전제: JDK 8~11 환경. Gradle 6.8.3은 JDK 17 이상에서 실패하므로, 최신 JDK에서는 아래 명령이 동작하지 않습니다.
+> 실행 전제: JDK 8 이상 17까지 확인(2026-09, Temurin 17에서 테스트 통과).
 
 1. gradlew 가 있는 프로젝트 루트 폴더에서 다음 명령어를 입력한다.
     ```
     ./gradlew build
     ```
-2. 빌드가 진행 된 후 `build/lib` 디렉토리에 jar파일이 생성된다.
-3. build/lib 디렉토리에서 다음 명령어를 입력해서 jar파일을 실행한다.
+2. 빌드가 진행 된 후 `build/libs` 디렉토리에 jar파일이 생성된다.
+3. build/libs 디렉토리에서 다음 명령어를 입력해서 jar파일을 실행한다.
     ```
     java -jar url-shortner-0.0.1-SNAPSHOT.jar
     ```
 4. http://localhost:8080에 접속
 
 ## 구현 환경
-- java 1.8
+- java 1.8 (타깃) / JDK 17에서 빌드·테스트 확인
 - intellij
-- springboot 2.4.4
+- springboot 2.7.18 (원본 2.4.4 → 2026-09 빌드 복구 시 상향)
 - spring data jpa
 - h2
